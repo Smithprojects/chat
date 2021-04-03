@@ -1,0 +1,144 @@
+.app {
+   border: 1px solid red;
+   display: flex;
+   justify-content: center;
+}
+
+.wraper {
+    // width: 280px;
+    border: 1px solid green;
+    // min-height: 500px;
+}
+
+.chat {
+    max-height: 450px;
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    // min-width: 0;
+    // width: 100%;
+    height: 450px;
+    word-wrap: break-word;
+    // background-color: #0e1c2f;
+    background-clip: border-box;
+    border: 5 solid #061325;
+    border-radius: .375rem;
+    background-image: url('../image/background.png');
+    background-size: cover;
+
+    &__nav-a {
+        height: 10%;
+    }
+
+    .nav-a {
+
+
+        &__wrapper {
+
+        }
+
+        &__text {
+
+        }
+
+        &__button {
+
+        }
+
+
+    }
+
+    &__messages {
+        
+    }
+
+    .messages {
+        height: 90%;
+        // height: 16%;
+        // overflow: auto;
+
+        &__wrap {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+          
+            &::-webkit-scrollbar {
+                width:0px;
+            }
+        }
+
+        &__card-a {
+
+        }
+
+        .card-a {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 16%;
+            margin-top: 5px;
+
+            &__text {
+                
+                // background-size: cover;
+                // width: 100%;
+                height: 100%;
+                width: 75%;
+
+                &_form-1 {
+                    background: url('/image/chat-form-1.png') no-repeat;
+                    background-size: 88% 100%;
+                }
+                
+                &_form-2 {
+                    background: url('/image/chat-form-2.png') no-repeat;
+                    background-size: 88% 100%;
+                }
+            }
+
+            &__text-position {
+                width: 86%;
+                height: 74%;
+                // border: 1px solid yellow;
+                padding-left: 20px;
+                font-size: 10px;
+                padding-top: 12px;
+            }
+
+            &__autor {
+
+            }
+
+            &__avatar {
+                width: 40px;
+                height: 40px;
+                border: 1px solid black;
+                border-radius: 50%;
+                margin: 0 auto;
+                
+            }
+
+            &__img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                box-shadow: 2px 3px 10px rgb(0,0,0,1);
+            }
+
+            &__name {
+
+            }
+
+            &__name-text {
+                text-align: center;
+                font-size: 10px;
+            }
+        }
+    }
+}
+
+.btn-svg {
+    width: 40px;
+}
