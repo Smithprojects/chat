@@ -1,7 +1,7 @@
 import {Chat} from './chat/chat'
 import './chat/styles.scss'
 
-const chat = new Chat('#chat', {
+const chat = new Chat('#wraper', {
 
 })
 

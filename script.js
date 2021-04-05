@@ -3,7 +3,7 @@ const $form = document.getElementById('messForm')
 const $messageInput = document.getElementById('message')
 const $displayAllMessages = document.getElementById('all_mess')
 
-const username = prompt('What is your name?')
+// const username = prompt('What is your name?')
 // const username = 'Smith'
 // appendMessage('You joined')
 socket.emit('new-user', username)

@@ -121,8 +121,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var socket = io('http://localhost:3000');
 var $form = document.getElementById('messForm');
 var $messageInput = document.getElementById('message');
-var $displayAllMessages = document.getElementById('all_mess');
-var username = prompt('What is your name?'); // const username = 'Smith'
+var $displayAllMessages = document.getElementById('all_mess'); // const username = prompt('What is your name?')
+// const username = 'Smith'
 // appendMessage('You joined')
 
 socket.emit('new-user', username);
@@ -163,7 +163,7 @@ function buddyBlockMessage(message) {
   var image = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/1.018fb9b1.png';
   return "\n    <div class=\"messages__card-a card-a\">\n        <div class=\"card-a__autor\">\n            <div class=\"card-a__avatar\">\n                <img class=\"card-a__img\" src=\"".concat(image, "\" alt=\"\">\n            </div>\n            <div class=\"card-a__name\">\n                <p class=\"card-a__name-text\">").concat(username, "</p>\n            </div>\n        </div>\n        <div class=\"card-a__text card-a__text_form-2\">\n            <div class=\"card-a__text-position\">").concat(message, "</div>\n        </div>\n        \n\n    </div>\n    ");
 }
-},{}],"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -191,7 +191,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59942" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41487" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -367,5 +367,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
+},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
 //# sourceMappingURL=/script.75da7f30.js.map

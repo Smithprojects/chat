@@ -127,14 +127,18 @@ exports.Chat = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+render;
+
 var Chat = function Chat(selector, options) {
   _classCallCheck(this, Chat);
 
   this.$el = document.querySelector(selector);
+  this.username = options.name;
+  this.image = options.image;
 };
 
 exports.Chat = Chat;
-},{}],"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -166,7 +170,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -201,12 +205,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"chat/styles.scss":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"chat/styles.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\image\\background.png":[["background.5e7f9762.png","image/background.png"],"image/background.png"],"K:\\Repository\\chat\\image\\chat-form-1.png":[["chat-form-1.1284b47d.png","image/chat-form-1.png"],"image/chat-form-1.png"],"K:\\Repository\\chat\\image\\chat-form-2.png":[["chat-form-2.537a342f.png","image/chat-form-2.png"],"image/chat-form-2.png"],"_css_loader":"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./../image/background.png":[["background.5e7f9762.png","image/background.png"],"image/background.png"],"/home/smith/Documents/repository/chat/image/chat-form-1.png":[["chat-form-1.1284b47d.png","image/chat-form-1.png"],"image/chat-form-1.png"],"/home/smith/Documents/repository/chat/image/chat-form-2.png":[["chat-form-2.537a342f.png","image/chat-form-2.png"],"image/chat-form-2.png"],"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _chat = require("./chat/chat");
@@ -246,7 +250,7 @@ window.c = chat; // import {express} from 'express'
 //         console.log('DISCONNECT');
 //     })
 // })
-},{"./chat/chat":"chat/chat.js","./chat/styles.scss":"chat/styles.scss"}],"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./chat/chat":"chat/chat.js","./chat/styles.scss":"chat/styles.scss"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -274,7 +278,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59942" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41487" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -450,5 +454,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/chat.e31bb0bc.js.map
