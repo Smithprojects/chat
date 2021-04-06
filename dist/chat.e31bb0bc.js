@@ -127,18 +127,39 @@ exports.Chat = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-render;
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+var getTemplate = function getTemplate() {
+  var namechat = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Active users';
+  var placeholder = arguments.length > 1 ? arguments[1] : undefined;
+  var text = placeholder !== null && placeholder !== void 0 ? placeholder : 'Enter message';
+  return "\n      \n        <div class=\"chat__nav-a nav-a bg-light py-2 card-header\">\n          <div class=\"nav-a__wrapper align-items-center row\">\n            <div class=\"nav-a__text col\">\n              <h6 class=\"mb-0\">".concat(namechat, "</h6>\n            </div>\n            <div class=\"nav-a__button text-right col-auto\">\n              <div class=\"text-sans-serif btn-reveal-trigger dropdown\">\n                <button type=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"btn-reveal text-600 btn btn-link btn-sm btn-close\">\n            \n                </button>\n                <div tabindex=\"-1\" role=\"menu\" aria-hidden=\"true\" class=\"border py-0 dropdown-menu dropdown-menu-right\">\n                  <div class=\"bg-white py-2\">\n                    <button type=\"button\" tabindex=\"0\" role=\"menuitem\" class=\"dropdown-item\">View</button>\n                    <button type=\"button\" tabindex=\"0\" role=\"menuitem\" class=\"dropdown-item\">Export</button>\n                    <div tabindex=\"-1\" class=\"dropdown-divider\"></div>\n                    <button type=\"button\" tabindex=\"0\" role=\"menuitem\" class=\"text-danger dropdown-item\">Remove</button>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"chat__messages messages\">\n          <div class=\"messages__wrap\">\n            \n                      \n          </div>\n\n        </div>\n        <div class=\"chat__input\">\n          <form action=\"\" id=\"messForm\">\n            <input type=\"text\" name=\"message\" id=\"message\" class=\"form-control\" placeholder=\"").concat(text, "\">\n          </form>\n        </div>\n\n  ");
+};
+
+var _render = new WeakSet();
 
 var Chat = function Chat(selector, options) {
   _classCallCheck(this, Chat);
 
+  _render.add(this);
+
   this.$el = document.querySelector(selector);
+  this.namechat = options.namechat;
   this.username = options.name;
   this.image = options.image;
+  this.options = options;
+
+  _classPrivateMethodGet(this, _render, _render2).call(this);
 };
 
 exports.Chat = Chat;
-},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+
+var _render2 = function _render2() {
+  var namechat = this.options.namechat;
+  this.$el.classList.add('chat');
+  this.$el.innerHTML = getTemplate(namechat); // this.$el.innerHTML = getTemplate(data, placeholder, this.selectedId)
+};
+},{}],"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -165,12 +186,12 @@ function getBundleURL() {
 }
 
 function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
 }
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -205,19 +226,21 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"chat/styles.scss":[function(require,module,exports) {
+},{"./bundle-url":"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"chat/styles.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../image/background.png":[["background.5e7f9762.png","image/background.png"],"image/background.png"],"/home/smith/Documents/repository/chat/image/chat-form-1.png":[["chat-form-1.1284b47d.png","image/chat-form-1.png"],"image/chat-form-1.png"],"/home/smith/Documents/repository/chat/image/chat-form-2.png":[["chat-form-2.537a342f.png","image/chat-form-2.png"],"image/chat-form-2.png"],"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\image\\background.png":[["background.5e7f9762.png","image/background.png"],"image/background.png"],"D:\\repository\\chat\\image\\chat-form-1.png":[["chat-form-1.1284b47d.png","image/chat-form-1.png"],"image/chat-form-1.png"],"D:\\repository\\chat\\image\\chat-form-2.png":[["chat-form-2.537a342f.png","image/chat-form-2.png"],"image/chat-form-2.png"],"_css_loader":"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _chat = require("./chat/chat");
 
 require("./chat/styles.scss");
 
-var chat = new _chat.Chat('#chat', {});
+var chat = new _chat.Chat('#test', {
+  namechat: 'Friends chat'
+});
 window.c = chat; // import {express} from 'express'
 // let express = require('express');
 // let app = express();
@@ -250,7 +273,7 @@ window.c = chat; // import {express} from 'express'
 //         console.log('DISCONNECT');
 //     })
 // })
-},{"./chat/chat":"chat/chat.js","./chat/styles.scss":"chat/styles.scss"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./chat/chat":"chat/chat.js","./chat/styles.scss":"chat/styles.scss"}],"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -278,7 +301,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41487" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53357" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -454,5 +477,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/chat.e31bb0bc.js.map
