@@ -27,6 +27,7 @@ $form.addEventListener('submit', e => {
     e.preventDefault()
     const message = $messageInput.value
     // appendMessage(`You: ${message}`)
+    console.log(socket.id)
 
     $messagesWrap.insertAdjacentHTML('beforeend', youBlockMessage(message, username))
 
