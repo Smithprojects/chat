@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 .app {
 //    border: 1px solid red;
    display: flex;
@@ -101,6 +107,7 @@
                 height: 100%;
                 // width: 75%;
                 width: auto;
+                min-width: 50px;
 
                 &_form-1 {
                     background: url('/image/chat-form-1.png') no-repeat;
@@ -124,7 +131,8 @@
             }
 
             &__autor {
-
+                // position: relative;
+                // top: 216%;
             }
 
             &__avatar {

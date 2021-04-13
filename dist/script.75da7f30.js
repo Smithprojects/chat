@@ -194,7 +194,7 @@ function buddyBlockMessage(message) {
   var image = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/1.018fb9b1.png';
   return "\n  <div class=\"messages__card-a card-a card-a_f-start\">\n    <div class=\"card-a__text card-a__text_form-1\">\n      <div class=\"card-a__text-position\">".concat(message, "</div>\n    </div>\n    <div class=\"card-a__autor\">\n      <div class=\"card-a__avatar\">\n        <img class=\"card-a__img\" src=\"").concat(image, "\" alt=\"\">\n      </div>\n      <div class=\"card-a__name\">\n        <p class=\"card-a__name-text\">").concat(username, "</p>\n      </div>\n    </div>\n  </div>\n  ");
 }
-},{}],"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -398,5 +398,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
+},{}]},{},["C:/Users/Smith/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
 //# sourceMappingURL=/script.75da7f30.js.map
