@@ -118,18 +118,39 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"script.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var socket = io('http://localhost:3000');
 var $form = document.getElementById('messForm');
 var $messageInput = document.getElementById('message');
-var $displayAllMessages = document.getElementById('all_mess'); // const username = prompt('What is your name?')
+var $displayAllMessages = document.getElementById('all_mess');
+var $allChatMessages = document.querySelector('.messages__wrap');
+var countMessages = 0; // const username = prompt('What is your name?')
 
 var username = 'Smith'; // appendMessage('You joined')
 
 socket.emit('new-user', username);
 socket.on('chat-message', function (data) {
+  // let countMessages =+ 1
   console.log(data); // appendMessage(`${data.username}: ${data.message}`)
 
-  $messagesWrap.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username));
+  $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username));
+
+  if (countMessages < _toConsumableArray($allChatMessages.querySelectorAll('.card-a')).length || countMessages == 0) {
+    $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username));
+  } else {
+    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message));
+  }
 });
 socket.on('user-connected', function (username) {// console.log(data);
   // appendMessage(`${username} connected`)
@@ -140,28 +161,38 @@ $form.addEventListener('submit', function (e) {
   e.preventDefault();
   var message = $messageInput.value; // appendMessage(`You: ${message}`)
 
-  $messagesWrap.insertAdjacentHTML('beforeend', youBlockMessage(message, username));
-  socket.emit('send-chat-message', message);
-  $messageInput.value = '';
+  if (countMessages < _toConsumableArray($allChatMessages.querySelectorAll('.card-a')).length || countMessages == 0) {
+    countMessages = +1;
+    $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(message, username));
+    console.log('chat', countMessages);
+    socket.emit('send-chat-message', message);
+    $messageInput.value = '';
+  } else {
+    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(message));
+    socket.emit('send-chat-message', message);
+    $messageInput.value = '';
+  }
 }); // function appendMessage(message) {
 //     const messageElement = document.createElement('div')
 //     messageElement.innerText = message
 //     $displayAllMessages.append(messageElement)
 // }
+// $messagesWrap.insertAdjacentHTML('beforeend', youBlockMessage('test', username))
 
-var $messagesWrap = document.querySelector('.messages__wrap');
-console.log($messagesWrap); // $messagesWrap.insertAdjacentHTML('beforeend', youBlockMessage('test', username))
+function blockDubleMessage(message) {
+  return "\n    <div class=\"card-a__text card-a__text_form-2\">\n      <div class=\"card-a__text-position\">".concat(message, "</div>\n    </div>\n  ");
+}
 
 function youBlockMessage(message) {
   var username = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'You name';
   var image = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/2.7fdf3601.png';
-  return "\n    <div class=\"messages__card-a card-a\">\n        <div class=\"card-a__text card-a__text_form-1\">\n            <div class=\"card-a__text-position\">".concat(message, "</div>\n        </div>\n        <div class=\"card-a__autor\">\n            <div class=\"card-a__avatar\">\n                <img class=\"card-a__img\" src=\"").concat(image, "\" alt=\"\">\n            </div>\n            <div class=\"card-a__name\">\n                <p class=\"card-a__name-text\">").concat(username, "</p>\n            </div>\n        </div>\n\n    </div>\n    ");
+  return "\n  <div class=\"messages__card-a card-a\">\n    <div class=\"card-a__text card-a__text_form-2\">\n      <div class=\"card-a__text-position\">".concat(message, "</div>\n    </div>\n    <div class=\"card-a__autor\">\n      <div class=\"card-a__avatar\">\n        <img class=\"card-a__img\" src=\"").concat(image, "\" alt=\"\">\n      </div>\n      <div class=\"card-a__name\">\n        <p class=\"card-a__name-text\">").concat(username, "</p>\n      </div>\n    </div>\n  </div>\n  ");
 }
 
 function buddyBlockMessage(message) {
   var username = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Buddy name';
   var image = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/1.018fb9b1.png';
-  return "\n    <div class=\"messages__card-a card-a\">\n        <div class=\"card-a__autor\">\n            <div class=\"card-a__avatar\">\n                <img class=\"card-a__img\" src=\"".concat(image, "\" alt=\"\">\n            </div>\n            <div class=\"card-a__name\">\n                <p class=\"card-a__name-text\">").concat(username, "</p>\n            </div>\n        </div>\n        <div class=\"card-a__text card-a__text_form-2\">\n            <div class=\"card-a__text-position\">").concat(message, "</div>\n        </div>\n        \n\n    </div>\n    ");
+  return "\n  <div class=\"messages__card-a card-a card-a_f-start\">\n    <div class=\"card-a__text card-a__text_form-1\">\n      <div class=\"card-a__text-position\">".concat(message, "</div>\n    </div>\n    <div class=\"card-a__autor\">\n      <div class=\"card-a__avatar\">\n        <img class=\"card-a__img\" src=\"").concat(image, "\" alt=\"\">\n      </div>\n      <div class=\"card-a__name\">\n        <p class=\"card-a__name-text\">").concat(username, "</p>\n      </div>\n    </div>\n  </div>\n  ");
 }
 },{}],"C:/Users/User/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -191,7 +222,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53357" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50598" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
