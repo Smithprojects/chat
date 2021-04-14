@@ -3,7 +3,7 @@ const $form = document.getElementById('messForm')
 const $messageInput = document.getElementById('message')
 const $displayAllMessages = document.getElementById('all_mess')
 const $allChatMessages = document.querySelector('.messages__wrap')
-let countMessages = 0
+let mess = false
 
 
 // const username = prompt('What is your name?')
@@ -12,23 +12,19 @@ const username = 'Smith'
 socket.emit('new-user', username)
 
 socket.on('chat-message', data => {
-  // let countMessages =+ 1
+ 
+  mess = false
+  console.log('data', data);
+ 
 
-  console.log(data);
-  // appendMessage(`${data.username}: ${data.message}`)
-  $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
-
-  if (countMessages < [...$allChatMessages.querySelectorAll('.card-a')].length || countMessages == 0) {
+  if (!data.mess) {
       
-      $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
-
+    $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
       
   } else {
         
-
-        $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message))
-      
-      
+    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
+   
   }
 })
 
@@ -43,40 +39,34 @@ socket.on('user-disconnect', username => {
 
 $form.addEventListener('submit', e => {
   e.preventDefault()
-  const message = $messageInput.value
+  const dataMessage = {
+    message: $messageInput.value,
+    mess: mess
+  }
+  // console.log(dataMessage.message)
   // appendMessage(`You: ${message}`)
 
   
-  if (countMessages < [...$allChatMessages.querySelectorAll('.card-a')].length || countMessages == 0) {
-    countMessages =+ 1
-    $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(message, username))
-
-    console.log('chat', countMessages)
-
-    socket.emit('send-chat-message', message)
-    $messageInput.value = ''
-  } else {
-        
-
-    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(message))
+  if (!mess) {
     
-    socket.emit('send-chat-message', message)
+    $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
+
+    socket.emit('send-chat-message', dataMessage)
+    $messageInput.value = ''
+    
+    mess = true
+  } else {
+     
+    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(dataMessage.message))
+    
+    socket.emit('send-chat-message', dataMessage)
     $messageInput.value = ''
   }
 })
 
-// function appendMessage(message) {
-//     const messageElement = document.createElement('div')
-//     messageElement.innerText = message
-//     $displayAllMessages.append(messageElement)
-// }
-
-
-// $messagesWrap.insertAdjacentHTML('beforeend', youBlockMessage('test', username))
-
-function blockDubleMessage(message) {
+function blockDubleMessage(message, form ='2') {
   return `
-    <div class="card-a__text card-a__text_form-2">
+    <div class="card-a__text card-a__text_form-${form}">
       <div class="card-a__text-position">${message}</div>
     </div>
   `

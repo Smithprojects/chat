@@ -16,8 +16,9 @@ io.on('connection', socket => {
 
     console.log('new User')
     // socket.emit('chat-message', 'Hello men')
-    socket.on('send-chat-message', message => {
-        socket.broadcast.emit('chat-message', {message: message, username: users[socket.id]})
+    socket.on('send-chat-message', dataMessage => {
+        console.log(dataMessage)
+        socket.broadcast.emit('chat-message', {message:dataMessage.message, mess:dataMessage.mess, username: users[socket.id]})
     })
 
     socket.on('disconnect', () => {
