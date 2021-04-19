@@ -3,8 +3,7 @@ const $form = document.getElementById('messForm')
 const $messageInput = document.getElementById('message')
 const $displayAllMessages = document.getElementById('all_mess')
 const $allChatMessages = document.querySelector('.messages__wrap')
-let mess = false
-
+let checkAnotherMesssage = false
 
 // const username = prompt('What is your name?')
 const username = 'Smith'
@@ -13,18 +12,13 @@ socket.emit('new-user', username)
 
 socket.on('chat-message', data => {
  
-  mess = false
+  checkAnotherMesssage = false
   console.log('data', data);
  
-
-  if (!data.mess) {
-      
+  if (!data.checkAnotherMesssage) {
     $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
-      
   } else {
-        
     $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
-   
   }
 })
 
@@ -41,26 +35,24 @@ $form.addEventListener('submit', e => {
   e.preventDefault()
   const dataMessage = {
     message: $messageInput.value,
-    mess: mess
+    checkAnotherMesssage: checkAnotherMesssage
   }
   // console.log(dataMessage.message)
   // appendMessage(`You: ${message}`)
-
   
-  if (!mess) {
-    
-    $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
+  if (dataMessage.message) {
+    socket.emit('send-chat-message', dataMessage)
+    $messageInput.value = ''
 
-    socket.emit('send-chat-message', dataMessage)
-    $messageInput.value = ''
-    
-    mess = true
+    if (!checkAnotherMesssage) {
+      $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
+      checkAnotherMesssage = true
+    } else {
+      $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(dataMessage.message))
+    }
+
   } else {
-     
-    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(dataMessage.message))
-    
-    socket.emit('send-chat-message', dataMessage)
-    $messageInput.value = ''
+    alert('you did not enter anything')
   }
 })
 

@@ -45,8 +45,10 @@ export class Chat {
   constructor(selector, options) {
     this.$el = document.querySelector(selector)
     this.namechat = options.namechat
-    this.username = options.name
-    this.image = options.image
+    this.themechat = options.themechat
+    this.username = options.username
+    this.avatar = options.avatar
+    this.toaskname = options.toaskname
     this.options = options
 
     this.#render()
