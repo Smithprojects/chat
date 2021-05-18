@@ -3,10 +3,11 @@ import './chat/styles.scss'
 
 const chat = new Chat('#test', {
     namechat: 'Friends chat',
-    themechat:'',
+    themechat:'neon',
     username: '',
     avatar: '',
-    toaskname: false
+    toaskname: false,
+    host: 'http://localhost:3000'
 
 })
 

@@ -18,7 +18,7 @@ io.on('connection', socket => {
     // socket.emit('chat-message', 'Hello men')
     socket.on('send-chat-message', dataMessage => {
         console.log(dataMessage)
-        socket.broadcast.emit('chat-message', {message:dataMessage.message, mess:dataMessage.mess, username: users[socket.id]})
+        socket.broadcast.emit('chat-message', {message:dataMessage.message, checkAnotherMesssage:dataMessage.checkAnotherMesssage, username: users[socket.id]})
     })
 
     socket.on('disconnect', () => {

@@ -32,9 +32,49 @@ body {
     background-clip: border-box;
     border: 5 solid #061325;
     border-radius: .375rem;
-    background-image: url('../image/neon_svg/Ресурс\ 9.svg');
+    background-image: url('../image/background.png');
     background-size: cover;
     box-shadow: 2px 3px 10px black;
+
+    &.neon {
+        // background-image: url('../image/neon_svg/Ресурс\ 9.svg');
+        // background-color: black;
+        background-image: url('../image/wall.jpg');
+
+        .card-a {
+            color: white;
+            .card-a__avatar {
+                .card-a__img {
+                    box-shadow: 1px 1px 10px #d7eef0;
+                }
+    
+            }
+            &__name-text {
+                color: #c6e2ff;
+                animation: neon .08s ease-in-out infinite alternate;
+            }
+
+            .card-a__text_form-1 {
+                background: url('/image/neon_svg/Ресурс\ 4.svg') no-repeat;
+            }
+
+            .card-a__text_form-2 {
+                background: url('/image/neon_svg/Ресурс\ 2.svg') no-repeat;
+            }
+        }
+
+        .nav-a {
+            background-color: rgba(253, 5, 191, 0.31) !important;
+            backdrop-filter: blur(4px);
+            border-bottom: 2px solid rgba(253, 5, 191, 0.6);
+
+        }
+        
+        .nav-a__text {
+            color: rgb(255, 73, 122);
+        }
+        
+    }
 
     &__nav-a {
         height: 10%;
@@ -110,7 +150,7 @@ body {
                 min-width: 50px;
 
                 &_form-1 {
-                    background: url('/image/neon_svg/Ресурс\ 5.svg') no-repeat;
+                    background: url('/image/chat-form-1.png') no-repeat;
                     background-size: 88% 100%;
                 }
                 
@@ -159,6 +199,7 @@ body {
                 text-align: center;
                 font-size: 10px;
                 margin: 0;
+                
             }
         }
     }
@@ -167,3 +208,46 @@ body {
 .btn-svg {
     width: 40px;
 }
+
+@keyframes neon {
+    from {
+      text-shadow:
+      0 0 6px rgba(202,228,225,0.92),
+      0 0 30px rgba(202,228,225,0.34),
+      0 0 12px rgba(30,132,242,0.52),
+      0 0 21px rgba(30,132,242,0.92),
+      0 0 34px rgba(30,132,242,0.78),
+      0 0 54px rgba(30,132,242,0.92);
+    }
+    to {
+      text-shadow:
+      0 0 6px rgba(202,228,225,0.98),
+      0 0 30px rgba(202,228,225,0.42),
+      0 0 12px rgba(30,132,242,0.58),
+      0 0 22px rgba(30,132,242,0.84),
+      0 0 38px rgba(30,132,242,0.88),
+      0 0 60px rgba(30,132,242,1);
+    }
+  }
+  
+  
+  
+  // Link
+  .link {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    color: #828282;
+    text-decoration: none;
+    
+    &:focus,
+    &:hover {
+      color: #c6e2ff;
+      text-shadow:
+      0 0 2px rgba(202,228,225,0.92),
+      0 0 10px rgba(202,228,225,0.34),
+      0 0 4px rgba(30,132,242,0.52),
+      0 0 7px rgba(30,132,242,0.92),
+      0 0 11px rgba(30,132,242,0.78),
+      0 0 16px rgba(30,132,242,0.92);
+    }
+  }

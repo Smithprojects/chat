@@ -1,3 +1,5 @@
+// import {connectUserForChat} from '../script.js'
+
 const getTemplate = (namechat = 'Active users', placeholder) => {
   let text = placeholder ?? 'Enter message'
   return `
@@ -50,16 +52,20 @@ export class Chat {
     this.avatar = options.avatar
     this.toaskname = options.toaskname
     this.options = options
-
+    
     this.#render()
   }
 
 
 
   #render() {
-    const {namechat} = this.options
+    const {namechat, themechat = ''} = this.options
     this.$el.classList.add('chat')
+    this.$el.classList.add(themechat)
     this.$el.innerHTML = getTemplate(namechat)
+    // connectUserForChat(this.options.host, this.username)
     // this.$el.innerHTML = getTemplate(data, placeholder, this.selectedId)
+    
   }
+
 }

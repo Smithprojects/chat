@@ -1,60 +1,40 @@
-const socket = io('http://localhost:3000')
-const $form = document.getElementById('messForm')
+// const socket = io('http://localhost:3000')
+// const $form = document.getElementById('messForm')
 const $messageInput = document.getElementById('message')
-const $displayAllMessages = document.getElementById('all_mess')
-const $allChatMessages = document.querySelector('.messages__wrap')
+// // // // const $displayAllMessages = document.getElementById('all_mess')
+// const $allChatMessages = document.querySelector('.messages__wrap')
 let checkAnotherMesssage = false
 
-// const username = prompt('What is your name?')
-const username = 'Smith'
-// appendMessage('You joined')
-socket.emit('new-user', username)
 
-socket.on('chat-message', data => {
+// // const username = prompt('What is your name?')
+ const username = 'Smith'
+// // appendMessage('You joined')
+// socket.emit('new-user', username)
+
+// socket.on('chat-message', data => {
  
-  checkAnotherMesssage = false
-  console.log('data', data);
+//   checkAnotherMesssage = false
+//   console.log('data', data);
  
-  if (!data.checkAnotherMesssage) {
-    $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
-  } else {
-    $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
-  }
-})
+//   if (!data.checkAnotherMesssage) {
+//     $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
+//   } else {
+//     $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
+//   }
+// })
 
-socket.on('user-connected', username => {
-  // console.log(data);
-  // appendMessage(`${username} connected`)
-})
+// socket.on('user-connected', username => {
+//   // console.log(data);
+//   // appendMessage(`${username} connected`)
+// })
 
-socket.on('user-disconnect', username => {
-  // appendMessage(`${username} disconnect`)
-})
+// socket.on('user-disconnect', username => {
+//   // appendMessage(`${username} disconnect`)
+// })
 
-$form.addEventListener('submit', e => {
-  e.preventDefault()
-  const dataMessage = {
-    message: $messageInput.value,
-    checkAnotherMesssage: checkAnotherMesssage
-  }
-  // console.log(dataMessage.message)
-  // appendMessage(`You: ${message}`)
-  
-  if (dataMessage.message) {
-    socket.emit('send-chat-message', dataMessage)
-    $messageInput.value = ''
 
-    if (!checkAnotherMesssage) {
-      $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
-      checkAnotherMesssage = true
-    } else {
-      $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(dataMessage.message))
-    }
 
-  } else {
-    alert('you did not enter anything')
-  }
-})
+
 
 function blockDubleMessage(message, form ='2') {
   return `
@@ -99,3 +79,73 @@ function buddyBlockMessage(message, username = 'Buddy name', image = '/1.018fb9b
   </div>
   `
 }
+
+function pushMessage(socket, $allChatMessages, event) {
+  event.preventDefault()
+  
+  const dataMessage = {
+    message: $messageInput.value,
+    checkAnotherMesssage: checkAnotherMesssage
+  }
+  
+  if (dataMessage.message) {
+    socket.emit('send-chat-message', dataMessage)
+    $messageInput.value = ''
+
+    if (!checkAnotherMesssage) {
+      $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
+      checkAnotherMesssage = true
+    } else {
+      $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(dataMessage.message))
+    }
+
+  } else {
+ 
+    alert('you did not enter anything')
+  }
+}
+
+export function connectUserForChat(host, username) {
+  
+  const socket = io(host)
+  const $form = document.getElementById('messForm')
+  const $allChatMessages = document.querySelector('.messages__wrap')
+  // const $displayAllMessages = document.getElementById('all_mess')
+    // let checkAnotherMesssage = false
+
+  $form.addEventListener('submit', pushMessage.bind($form, socket, $allChatMessages))
+
+  // if (!!username) {
+  //   return username = prompt('What is your name?')
+  // }
+  
+  // const username = prompt('What is your name?')
+  // const username = 'Smith'
+  // appendMessage('You joined')
+  socket.emit('new-user', username)
+
+  socket.on('chat-message', data => {
+  
+    checkAnotherMesssage = false
+    console.log('data', data);
+  
+    if (!data.checkAnotherMesssage) {
+      $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
+    } else {
+      $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
+    }
+  })
+
+  socket.on('user-connected', username => {
+    // console.log(data);
+    // appendMessage(`${username} connected`)
+  })
+
+  socket.on('user-disconnect', username => {
+    // appendMessage(`${username} disconnect`)
+  })
+
+
+}
+
+connectUserForChat('http://localhost:3000', 'Poule')
