@@ -1,4 +1,7 @@
-// import {connectUserForChat} from '../script.js'
+// import {socket} from '../script.js'
+// const socket = io('http://localhost:3000')
+// console.log(socket)
+import {connectUserForChat} from '../script.js'
 
 const getTemplate = (namechat = 'Active users', placeholder) => {
   let text = placeholder ?? 'Enter message'
@@ -56,16 +59,17 @@ export class Chat {
     this.#render()
   }
 
-
-
   #render() {
     const {namechat, themechat = ''} = this.options
     this.$el.classList.add('chat')
     this.$el.classList.add(themechat)
     this.$el.innerHTML = getTemplate(namechat)
-    // connectUserForChat(this.options.host, this.username)
+    connectUserForChat(this.options.host, this.username)
     // this.$el.innerHTML = getTemplate(data, placeholder, this.selectedId)
-    
+    // console.log(socket)
   }
 
+  newChatName(name) {
+    this.$el.querySelector('.nav-a__text').firstElementChild.innerText = name
+  }
 }

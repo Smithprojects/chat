@@ -1,39 +1,30 @@
-// const socket = io('http://localhost:3000')
-// const $form = document.getElementById('messForm')
-const $messageInput = document.getElementById('message')
-// // // // const $displayAllMessages = document.getElementById('all_mess')
-// const $allChatMessages = document.querySelector('.messages__wrap')
-let checkAnotherMesssage = false
+import { io } from "socket.io-client"
+import { scrollBlockInBottom } from './utils.js'
 
+let checkAnotherMesssage = false
 
 // // const username = prompt('What is your name?')
  const username = 'Smith'
 // // appendMessage('You joined')
-// socket.emit('new-user', username)
 
-// socket.on('chat-message', data => {
- 
-//   checkAnotherMesssage = false
-//   console.log('data', data);
- 
-//   if (!data.checkAnotherMesssage) {
-//     $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
-//   } else {
-//     $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
-//   }
-// })
+function check() {
+  let cheks = false
+  return {
+    cheks: cheks,
+    func: function(){
+      return cheks=!cheks
+    }
+  }
+}
 
-// socket.on('user-connected', username => {
-//   // console.log(data);
-//   // appendMessage(`${username} connected`)
-// })
-
-// socket.on('user-disconnect', username => {
-//   // appendMessage(`${username} disconnect`)
-// })
-
-
-
+// let check2 = check()
+// console.log(check2.cheks)
+// console.log(check2.func())
+// console.log(check2.func())
+// if (check2.cheks) {
+//   console.log(check2.func())
+// }
+// console.log(check2.func())
 
 
 function blockDubleMessage(message, form ='2') {
@@ -82,39 +73,40 @@ function buddyBlockMessage(message, username = 'Buddy name', image = '/1.018fb9b
 
 function pushMessage(socket, $allChatMessages, event) {
   event.preventDefault()
+  const $messageInput = document.getElementById('message')
   
   const dataMessage = {
     message: $messageInput.value,
     checkAnotherMesssage: checkAnotherMesssage
   }
-  
-  if (dataMessage.message) {
-    socket.emit('send-chat-message', dataMessage)
-    $messageInput.value = ''
 
-    if (!checkAnotherMesssage) {
-      $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
-      checkAnotherMesssage = true
-    } else {
-      $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(dataMessage.message))
-    }
-
-  } else {
- 
+  if (!dataMessage.message) {
     alert('you did not enter anything')
+    return
   }
+  
+  socket.emit('send-chat-message', dataMessage)
+  $messageInput.value = ''
+
+  if (!checkAnotherMesssage) {
+    $allChatMessages.insertAdjacentHTML('beforeend', youBlockMessage(dataMessage.message, username))
+    
+    checkAnotherMesssage = true
+  } else {
+    $allChatMessages.lastElementChild.lastElementChild.insertAdjacentHTML('beforeBegin', blockDubleMessage(dataMessage.message))
+  }
+  scrollBlockInBottom()
 }
 
 export function connectUserForChat(host, username) {
   
   const socket = io(host)
   const $form = document.getElementById('messForm')
+  console.log('form', $form)
   const $allChatMessages = document.querySelector('.messages__wrap')
-  // const $displayAllMessages = document.getElementById('all_mess')
-    // let checkAnotherMesssage = false
 
   $form.addEventListener('submit', pushMessage.bind($form, socket, $allChatMessages))
-
+  
   // if (!!username) {
   //   return username = prompt('What is your name?')
   // }
@@ -132,8 +124,9 @@ export function connectUserForChat(host, username) {
     if (!data.checkAnotherMesssage) {
       $allChatMessages.insertAdjacentHTML('beforeend', buddyBlockMessage(data.message, data.username))
     } else {
-      $allChatMessages.lastElementChild.insertAdjacentHTML('afterbegin', blockDubleMessage(data.message,'1'))
+      $allChatMessages.lastElementChild.lastElementChild.insertAdjacentHTML('beforeBegin', blockDubleMessage(data.message,'1'))
     }
+    scrollBlockInBottom()
   })
 
   socket.on('user-connected', username => {
@@ -148,4 +141,4 @@ export function connectUserForChat(host, username) {
 
 }
 
-connectUserForChat('http://localhost:3000', 'Poule')
+// connectUserForChat('http://localhost:3000', 'Poule')
